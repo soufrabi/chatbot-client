@@ -1,0 +1,5 @@
+# git ignore
+
+
+node_modules/
+APP-linux-x64/
