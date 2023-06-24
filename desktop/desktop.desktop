@@ -6,4 +6,5 @@ Exec=/usr/local/bin/chatgpt-electron
 Name=ChatGPT
 Comment=ChatGPT Unofficial electron client for Desktop
 Icon=/usr/local/share/icons/chatgpt-electron.jpg
+StartupWMClass=app-nativefier-9028de
 
