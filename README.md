@@ -32,18 +32,6 @@
 
 ## Getting Started
 
-### Installation
-Download the application for your OS from the
-<a href="https://github.com/anirbandey1/chatgpt-electron/releases/">releases section</a>
-
-#### Add your API key
-
-1. Go to Settings -> Edit Settings -> API
-2. Paste or Type your API key 
-3. Click on Save
-
-## Getting Started
-
 ### Install
 
 ```sh
