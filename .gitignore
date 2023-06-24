@@ -3,3 +3,4 @@
 
 node_modules/
 APP-linux-x64/
+*-linux-x64/
