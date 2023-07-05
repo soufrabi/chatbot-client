@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Development;
-Comment=ChatGPT
+Comment=ChatGPT Electron
 Exec=chatgpt-electron
 Icon=chatgpt-electron
 Name=ChatGPT
