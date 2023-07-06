@@ -22,10 +22,7 @@ clean :
 	unlink /usr/local/bin/${command}
 	
 flatpak :
-	cp -r assets/usr/share /app
-	install -Dm 755 assets/usr/bin/chatgpt-electron /app/bin/chatgpt-electron
-	mv assets/usr/share/metainfo/chatgpt-electron.metainfo.xml /app/share/metainfo/io.github.anirbandey1.ChatGPTElectron.metainfo.xml
-	# desktop-file-edit --set-key=Exec --set-value="run.sh" /app/share/applications/chatgpt-electron.desktop
+	cp -r assets/usr/share/* /app
 	desktop-file-edit --set-key=Icon --set-value="io.github.anirbandey1.ChatGPTElectron" /app/share/applications/chatgpt-electron.desktop
 	mkdir -pv /app/opt/chatgpt-electron
 	cp -r * /app/opt/chatgpt-electron
