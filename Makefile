@@ -10,8 +10,8 @@ install :
 	cp -rv ${name}-linux-x64 /opt/${name}
 	mkdir -pv /usr/local/share/applications
 	mkdir -pv /usr/local/share/icons
-	cp ./desktop/desktop.desktop /usr/local/share/applications/${name}.desktop
-	cp ./desktop/icon.png /usr/local/share/icons/${name}.png
+	cp ./desktop/desktop.desktop /usr/share/applications/${name}.desktop
+	cp ./desktop/icon.png /usr/share/icons/${name}.png
 	ln -sv /opt/${name}/${name}-linux-x64/${command} /usr/local/bin/${command}
 
 
@@ -20,9 +20,15 @@ clean :
 	rm -fv /usr/local/share/applications/${name}.desktop
 	rm -fv /usr/local/share/icons/${name}.png
 	unlink /usr/local/bin/${command}
+
+deb:
+	mkdir "${name}"
+	mkdir -pv "${name}/{usr,opt}"
+	cp -rv "${name}-linux-x64" "${name}/opt"
+	cp -rv "assets/usr/share" "${name}/usr"
 	
 flatpak :
-	cp -r assets/usr/share/* /app
+	cp -r assets/usr/* /app
 	desktop-file-edit --set-key=Icon --set-value="io.github.anirbandey1.ChatGPTElectron" /app/share/applications/chatgpt-electron.desktop
 	mkdir -pv /app/opt/chatgpt-electron
 	cp -r * /app/opt/chatgpt-electron
