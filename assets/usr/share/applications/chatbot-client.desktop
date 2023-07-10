@@ -1,0 +1,8 @@
+[Desktop Entry]
+Categories=Development;
+Comment=Chatbot Client Desktop Application
+Exec=chatbot-client
+Icon=chatbot-client
+Name=Chatbot Client
+Terminal=false
+Type=Application

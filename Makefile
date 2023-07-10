@@ -1,5 +1,5 @@
-name="chatgpt-electron"
-command="chatgpt-electron"
+name="chatbot-client"
+command="chatbot-client"
 
 prepare :
 	npm install
@@ -29,6 +29,6 @@ deb:
 	
 flatpak :
 	cp -r assets/usr/* /app
-	desktop-file-edit --set-key=Icon --set-value="io.github.anirbandey1.ChatGPTElectron" /app/share/applications/chatgpt-electron.desktop
-	mkdir -pv /app/opt/chatgpt-electron
-	cp -r * /app/opt/chatgpt-electron
+	desktop-file-edit --set-key=Icon --set-value="io.github.anirbandey1.ChatbotClient" /app/share/applications/chatbot-client.desktop
+	mkdir -pv /app/opt/chatbot-client
+	cp -r * /app/opt/chatbot-client

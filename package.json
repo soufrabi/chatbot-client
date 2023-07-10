@@ -1,10 +1,10 @@
 {
-  "name":"chatgpt-electron",
+  "name":"chatbot-client",
   "version":"0.1.0",
   "main":"main.js",
   "scripts":{
     "start":"electron .",
-    "build":"nativefier --name 'chatgpt-electron' --icon 'desktop/icon.png' 'https://chat.openai.com'"
+    "build":"nativefier --name 'chatbot-client'  'https://chat.openai.com'"
   },
   "dependencies":{
     "electron":"^25.2.0",

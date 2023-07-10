@@ -1,8 +1,0 @@
-[Desktop Entry]
-Categories=Development;
-Comment=ChatGPT Electron
-Exec=chatgpt-electron
-Icon=chatgpt-electron
-Name=ChatGPT
-Terminal=false
-Type=Application

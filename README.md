@@ -5,19 +5,19 @@
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg">
   </a>
 
-  <a href="https://github.com/anirbandey1/chatgpt-electron/commits/master">
-    <img alt="GitHub commits" src="https://img.shields.io/github/commit-activity/y/anirbandey1/chatgpt-electron?color=red&label=commits">
+  <a href="https://github.com/anirbandey1/chatbot-client/commits/master">
+    <img alt="GitHub commits" src="https://img.shields.io/github/commit-activity/y/anirbandey1/chatbot-client?color=red&label=commits">
   </a>
 
-  <a href="https://github.com/anirbandey1/chatgpt-electron/issues">
-    <img alt="GitHub issues" src="https://img.shields.io/github/issues/anirbandey1/chatgpt-electron?color=important">
+  <a href="https://github.com/anirbandey1/chatbot-client/issues">
+    <img alt="GitHub issues" src="https://img.shields.io/github/issues/anirbandey1/chatbot-client?color=important">
   </a>
-  <a href="https://github.com/anirbandey1/chatgpt-electron/pulls">
-    <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/anirbandey1/chatgpt-electron?color=blueviolet">
+  <a href="https://github.com/anirbandey1/chatbot-client/pulls">
+    <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/anirbandey1/chatbot-client?color=blueviolet">
   </a>
 
-  <a href="https://github.com/anirbandey1/chatgpt-electron/stargazers">
-    <img alt="GitHub stars" src="https://img.shields.io/github/stars/anirbandey1/chatgpt-electron?style=social">
+  <a href="https://github.com/anirbandey1/chatbot-client/stargazers">
+    <img alt="GitHub stars" src="https://img.shields.io/github/stars/anirbandey1/chatbot-client?style=social">
   </a>
 
 </p>
@@ -25,8 +25,8 @@
 ## Screenshots
 <div align="center" style=""> 
 
-  <img alt="screenshot1" style="max-width:40vw;" src="https://anirbandey1.github.io/assets/chatgpt-electron/screenshots/screenshot1.png">
-  <img alt="screenshot1" style="max-width:40vw;" src="https://anirbandey1.github.io/assets/chatgpt-electron/screenshots/screenshot2.png">
+  <img alt="screenshot1" style="max-width:40vw;" src="https://anirbandey1.github.io/assets/chatbot-client/screenshots/screenshot1.png">
+  <img alt="screenshot1" style="max-width:40vw;" src="https://anirbandey1.github.io/assets/chatbot-client/screenshots/screenshot2.png">
 
 </div>
 
@@ -35,8 +35,8 @@
 ### Install
 
 ```sh
-git clone https://github.com/anirbandey1/chatgpt-electron.git
-cd chatgpt-electron
+git clone https://github.com/anirbandey1/chatbot-client.git
+cd chatbot-client
 make prepare
 sudo make install
 ```
