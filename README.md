@@ -1,4 +1,4 @@
-<h1 align="center"> ChatGPT electron app </h1> 
+<h1 align="center"> Chatbot Client Electron App </h1> 
 
 <p align="center">
   <a href="https://opensource.org/licenses/MIT">
