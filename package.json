@@ -1,10 +1,10 @@
 {
   "name":"chatbot-client",
-  "version":"0.1.0",
+  "version":"1.0.1",
   "main":"main.js",
   "scripts":{
     "start":"electron .",
-    "build":"nativefier --name 'chatbot-client'  'https://chat.openai.com'"
+    "build":"nativefier --name 'chatbot-client'  'https://chat.openai.com'  --user-agent 'Mozilla/5.0 (Windows NT 10.0; rv:74.0) Gecko/20100101'  "
   },
   "dependencies":{
     "electron":"^25.2.0",
