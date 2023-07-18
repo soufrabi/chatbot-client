@@ -1,31 +1,24 @@
 name="chatbot-client"
 command="chatbot-client"
+build_dir="build-linux-binary"
 
 prepare :
 	npm install
 	npm run build
 
-install :
-	mkdir -pv /opt/${name}
-	cp -rv ${name}-linux-x64 /opt/${name}
-	mkdir -pv /usr/local/share/applications
-	mkdir -pv /usr/local/share/icons
-	cp ./desktop/desktop.desktop /usr/share/applications/${name}.desktop
-	cp ./desktop/icon.png /usr/share/icons/${name}.png
-	ln -sv /opt/${name}/${name}-linux-x64/${command} /usr/local/bin/${command}
-
-
-clean :
-	rm -rfv /opt/${name}
-	rm -fv /usr/local/share/applications/${name}.desktop
-	rm -fv /usr/local/share/icons/${name}.png
-	unlink /usr/local/bin/${command}
 
 deb:
-	mkdir "${name}"
-	mkdir -pv "${name}/{usr,opt}"
-	cp -rv "${name}-linux-x64" "${name}/opt"
-	cp -rv "assets/usr/share" "${name}/usr"
+	echo ${build_dir}
+	rm -rf ${build_dir}
+	mkdir -pv "${build_dir}/${name}"
+	mkdir -pv "${build_dir}/${name}/usr"
+	mkdir -pv "${build_dir}/${name}/opt/chatbot-client"
+	cp -rv "assets/DEBIAN" "${build_dir}/${name}"
+	cp -rv "${name}-linux-x64" "${build_dir}/${name}/opt/${name}"
+	cp -rv "assets/usr/bin" "${build_dir}/${name}/usr"
+	cp -rv "assets/usr/share" "${build_dir}/${name}/usr"
+	cd ${build_dir} && dpkg-deb --build ${name}
+
 	
 flatpak :
 	cp -r assets/usr/* /app

@@ -25,26 +25,26 @@
 ## Screenshots
 <div align="center" style=""> 
 
-  <img alt="screenshot1" style="max-width:40vw;" src="https://anirbandey1.github.io/assets/chatbot-client/screenshots/screenshot1.png">
-  <img alt="screenshot1" style="max-width:40vw;" src="https://anirbandey1.github.io/assets/chatbot-client/screenshots/screenshot2.png">
+  <img alt="screenshot1" style="max-width:40vw;" src="https://anirbandey1.github.io/assets/chatbot-client/screenshots/login_page.png">
+  <!-- <img alt="screenshot1" style="max-width:40vw;" src="https://anirbandey1.github.io/assets/chatbot-client/screenshots/screenshot2.png"> -->
 
 </div>
 
 ## Getting Started
 
-### Install
+### Build from source
+
+Create a debian binary
 
 ```sh
 git clone https://github.com/anirbandey1/chatbot-client.git
 cd chatbot-client
 make prepare
-sudo make install
+make deb
+cd build-linux-binary
+sudo apt install ./chhatbot-client.deb
 ```
 
-### Remove
-```
-sudo make clean
-```
 
 
 ## Author

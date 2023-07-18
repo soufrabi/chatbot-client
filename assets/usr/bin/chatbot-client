@@ -9,6 +9,7 @@ if [ -f /.flatpak-info ]; then
 
 else 
     echo "Not a flatpak environment"
+    /opt/chatbot-client/chatbot-client-linux-x64/chatbot-client
 fi
 
 
