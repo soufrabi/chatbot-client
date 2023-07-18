@@ -31,12 +31,16 @@
   <releases>
     <release version="1.0.1" date="2023-07-17">
       <description>
-        Fixed Google Authentication bug by adding user-agent flag to nativefier
+        <p>
+          Fixed Google Authentication bug by adding user-agent flag to nativefier
+        </p>
       </description>
     </release>
     <release version="1.0.0" date="2023-07-04">
       <description>
-        Initial Release
+        <p>
+          Initial Release
+        </p>
       </description>
     </release>
   </releases>
