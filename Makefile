@@ -13,7 +13,7 @@ deb:
 	rm -rf ${build_dir}
 	mkdir -pv "${build_dir}/${_pkgname}"
 	mkdir -pv "${build_dir}/${_pkgname}/usr"
-	mkdir -pv "${build_dir}/${_pkgname}/opt/chatbot-client"
+	mkdir -pv "${build_dir}/${_pkgname}/opt/${_pkgname}"
 	cp -rv "assets/DEBIAN" "${build_dir}/${_pkgname}"
 	cp -rv "${_pkgname}-linux-x64" "${build_dir}/${_pkgname}/opt/${_pkgname}"
 	cp -rv "assets/usr/bin" "${build_dir}/${_pkgname}/usr"
