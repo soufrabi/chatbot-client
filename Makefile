@@ -23,6 +23,7 @@ deb:
 	
 flatpak :
 	cp -r assets/usr/* /app
+	desktop-file-edit --set-key=Exec --set-value="/app/bin/chatbot-client" /app/share/applications/chatbot-client.desktop
 	desktop-file-edit --set-key=Icon --set-value="io.github.anirbandey1.ChatbotClient" /app/share/applications/chatbot-client.desktop
 	mkdir -pv /app/opt/chatbot-client
 	cp -r * /app/opt/chatbot-client
