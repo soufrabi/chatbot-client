@@ -1,4 +1,4 @@
-name="chatbot-client"
+pkgname="chatbot-client"
 _pkgname="chatbot-client"
 command="chatbot-client"
 build_dir="build_linux"
