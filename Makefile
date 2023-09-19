@@ -26,7 +26,7 @@ flatpak:
 	rm -vf chatbot-client.deb control.tar.xz debian-binary
 	tar -xf data.tar.*
 	rm -vf data.tar.xz
-	cp -rv opt /app
+	cp -rv opt/chatbot-client/chatbot-client-linux-x64 /app/chatbot-client
 	cp -rv usr/share /app
 	cp -rv usr/bin /app
 	desktop-file-edit --set-key=Exec --set-value="/app/bin/chatbot-client" /app/share/applications/chatbot-client.desktop
