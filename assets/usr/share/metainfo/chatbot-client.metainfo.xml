@@ -6,9 +6,9 @@
   <project_license>MIT</project_license>
   <name>Chatbot Client</name>
   <developer_name>Anirban Dey</developer_name>
-  <url type="homepage">https://github.com/anirbandey1/chatbot-client/</url>
+  <url type="homepage">https://github.com/soufrabi/chatbot-client/</url>
   <url type="bugtracker">https://github.com/flathub/io.github.anirbandey1.ChatbotClient/issues</url>
-  <url type="help">https://github.com/anirbandey1/chatbot-client</url>
+  <url type="help">https://github.com/soufrabi/chatbot-client</url>
   <summary>Electron wrapper for ChatGPT website</summary>
   <description>
     <p>A desktop application for using ChatGPT.</p>
@@ -16,7 +16,7 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image>https://anirbandey1.github.io/assets/chatbot-client/screenshots/login-page.png</image>
+      <image>https://soufrabi.github.io/project-assets/chatbot-client/screenshots/login-page.png</image>
       <caption>Screenshot of login page </caption>
     </screenshot>
   </screenshots>
