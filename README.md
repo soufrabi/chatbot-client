@@ -5,19 +5,19 @@
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg">
   </a>
 
-  <a href="https://github.com/anirbandey1/chatbot-client/commits/master">
-    <img alt="GitHub commits" src="https://img.shields.io/github/commit-activity/y/anirbandey1/chatbot-client?color=red&label=commits">
+  <a href="https://github.com/soufrabi/chatbot-client/commits/master">
+    <img alt="GitHub commits" src="https://img.shields.io/github/commit-activity/y/soufrabi/chatbot-client?color=red&label=commits">
   </a>
 
-  <a href="https://github.com/anirbandey1/chatbot-client/issues">
-    <img alt="GitHub issues" src="https://img.shields.io/github/issues/anirbandey1/chatbot-client?color=important">
+  <a href="https://github.com/soufrabi/chatbot-client/issues">
+    <img alt="GitHub issues" src="https://img.shields.io/github/issues/soufrabi/chatbot-client?color=important">
   </a>
-  <a href="https://github.com/anirbandey1/chatbot-client/pulls">
-    <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/anirbandey1/chatbot-client?color=blueviolet">
+  <a href="https://github.com/soufrabi/chatbot-client/pulls">
+    <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/soufrabi/chatbot-client?color=blueviolet">
   </a>
 
-  <a href="https://github.com/anirbandey1/chatbot-client/stargazers">
-    <img alt="GitHub stars" src="https://img.shields.io/github/stars/anirbandey1/chatbot-client?style=social">
+  <a href="https://github.com/soufrabi/chatbot-client/stargazers">
+    <img alt="GitHub stars" src="https://img.shields.io/github/stars/soufrabi/chatbot-client?style=social">
   </a>
 
 </p>
@@ -25,8 +25,8 @@
 ## Screenshots
 <div align="center" style=""> 
 
-  <img alt="screenshot1" style="max-width:40vw;" src="https://anirbandey1.github.io/assets/chatbot-client/screenshots/login_page.png">
-  <!-- <img alt="screenshot1" style="max-width:40vw;" src="https://anirbandey1.github.io/assets/chatbot-client/screenshots/screenshot2.png"> -->
+  <img alt="screenshot1" style="max-width:40vw;" src="https://soufrabi.github.io/assets/chatbot-client/screenshots/login_page.png">
+  <!-- <img alt="screenshot1" style="max-width:40vw;" src="https://soufrabi.github.io/assets/chatbot-client/screenshots/screenshot2.png"> -->
 
 </div>
 
@@ -37,12 +37,12 @@
 Create a debian binary
 
 ```sh
-git clone https://github.com/anirbandey1/chatbot-client.git
+git clone https://github.com/soufrabi/chatbot-client.git
 cd chatbot-client
-make prepare
-make deb
-cd build-linux-binary
-sudo apt install ./chhatbot-client.deb
+./scripts/linux.sh setup
+./scripts/linux.sh build-deb
+cd build_binary
+sudo apt install ./chatbot-client.deb
 ```
 
 
