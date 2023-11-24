@@ -1,0 +1,102 @@
+name: release
+
+on:
+
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Tag name for release'
+        required: false
+        default: nightly
+  push:
+    tags:
+    - "v[0-9]+.[0-9]+.[0-9]+"
+    - "stable"
+    - "nightly"
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Dependencies
+      run: ./scripts/linux.sh deps
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 18
+    - name: Setup
+      run: ./scripts/linux.sh setup
+    - name: Build
+      run: ./scripts/linux.sh build-deb
+    - uses: actions/upload-artifact@v3
+      with:
+        name: artefacts_linux
+        path: ./build_binary/*.deb
+        if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
+        retention-days: 1
+
+  publish:
+    needs: [build-linux]
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    env:
+      GH_REPO: ${{ github.repository }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: write
+    steps:
+      # Must perform checkout first, since it deletes the target directory
+      # before running, and would therefore delete the downloaded artifacts
+      - uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v3
+      - name: Install dependencies
+        run: | 
+          sudo apt-get update && sudo apt-get install -y gettext-base
+          sudo apt install -y tree
+
+
+      - if: github.event_name == 'workflow_dispatch'
+        run: echo "TAG_NAME=${{ github.event.inputs.tag_name }}" >> $GITHUB_ENV
+      - if: github.event_name == 'schedule'
+        run: echo 'TAG_NAME=nightly' >> $GITHUB_ENV
+      - if: github.event_name == 'push'
+        run: |
+          TAG_NAME=${{ github.ref }}
+          echo "TAG_NAME=${TAG_NAME#refs/tags/}" >> $GITHUB_ENV
+
+      # - name: Rename artefacts
+      #   run: | 
+      #     mv -v artefacts_linux/ryuu artefacts_linux/ryuu-linux
+      - name: Public release
+        run: |
+          echo "Publishing to github release"
+          tree -L 3
+          gh release create $TAG_NAME || echo "Release creation failed, but continuing..." && true
+          gh release upload --clobber $TAG_NAME artefacts_linux/*
+
+
+  remove-old-artifacts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions: write-all
+
+    needs: [build-linux, publish]
+    if: always()  # This ensures that cleanup runs even if dependent jobs fail
+
+    steps:
+
+    - name: Remove old artifacts
+      uses: c-hive/gha-remove-artifacts@v1
+      with:
+        age: '0 second' # '<number> <unit>', e.g. 5 days, 2 years, 90 seconds, parsed by Moment.js
+    - uses: geekyeggo/delete-artifact@v2
+      with:
+          name: |
+              artifact*
+              artefact*
+              .*
+          failOnError: true
+
