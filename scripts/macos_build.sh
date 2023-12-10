@@ -22,7 +22,7 @@ build_nativifier_binary() {
 package_binary() {
     mkdir "$build_dir"
     ls "${_package_name}-darwin-x64"
-    mv "${_package_name}-darwin-x64/*.app" "$build_dir"
+    mv "${_package_name}-darwin-x64/${_package_name}.app" "$build_dir"
 }
 
 build_main() {
