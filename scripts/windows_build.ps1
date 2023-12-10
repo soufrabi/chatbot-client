@@ -23,7 +23,9 @@ function BuildBinary {
 
 New-Item -Path "$build_dir" -Type Directory
 
-Move-Item -Path ".\dist\main.exe" -Destination "$build_dir\$executable_name"
+ls ".\$package_name-win32-x64"
+
+Move-Item -Path ".\${package_name}-win32-x64" -Destination "$build_dir\$executable_name"
 
 
 }
