@@ -46,6 +46,7 @@ jobs:
       with:
         node-version: 18
     - name: linux build
+      if: matrix.build == 'linux'
       run: |
         ./scripts/linux_build.sh gh
     - name: windows build

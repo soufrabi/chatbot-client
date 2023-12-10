@@ -76,7 +76,7 @@ build_flatpak() {
 gh_build() {
     install_dependencies
     setup_env
-    build-deb
+    build_deb
 }
 
 
