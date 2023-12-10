@@ -6,6 +6,7 @@ show_help(){
 linux.sh
 
 Choose one of the available commands:
+    gh
 	build-deb
 	build-flatpak
 	setup
@@ -24,10 +25,8 @@ if [ $# -eq 0 ]; then
 fi
 
 
-pkgname="chatbot-client"
 _pkgname="chatbot-client"
-command="chatbot-client"
-build_dir="build_binary"
+build_dir="build-linux-$(uname -m)"
 
 install_dependencies() {
 	echo "Install dependencies in Linux"
@@ -74,6 +73,13 @@ build_flatpak() {
 
 }
 
+gh_build() {
+    install_dependencies
+    setup_env
+    build-deb
+}
+
+
 
 
 
@@ -92,6 +98,10 @@ main() {
 		(deps)
 			shift
 			install_dependencies "$@"
+			;;
+		(gh)
+			shift
+			gh_build "$@"
 			;;
 		(setup)
 			shift

@@ -1,46 +1,77 @@
 name: release
 
 on:
-
-  workflow_dispatch:
-    inputs:
-      tag_name:
-        description: 'Tag name for release'
-        required: false
-        default: nightly
   push:
+    branches:
+      - "main"
+      - "master"
     tags:
-    - "v[0-9]+.[0-9]+.[0-9]+"
+    - "v[0-9]+.[0-9]+.[0-9]+*"
     - "stable"
-    - "latest"
-    - "nightly"
+  pull_request:
+  # schedule:
+  # - cron: '20 2 */7 * *'
+
+env:
+  APP_VERSION: "v1.0.2"
 
 jobs:
-  build-linux:
-    runs-on: ubuntu-22.04
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - build: linux
+            os: ubuntu-latest
+            arch: x86_64
+            target: x86_64-unknown-linux-gnu
+          - build: macos
+            os: macos-latest
+            arch: x86_64
+            target: x86_64-apple-darwin
+          - build: macos
+            os: macos-latest
+            arch: aarch64
+            target: aarch64-apple-darwin
+          - build: windows
+            os: windows-latest
+            arch: x86_64
+            target: x86_64-pc-windows-msvc
     timeout-minutes: 5
 
     steps:
     - uses: actions/checkout@v3
-    - name: Dependencies
-      run: ./scripts/linux.sh deps
     - uses: actions/setup-node@v4
       with:
         node-version: 18
-    - name: Setup
-      run: ./scripts/linux.sh setup
-    - name: Build
-      run: ./scripts/linux.sh build-deb
+    - name: linux build
+      run: |
+        ./scripts/linux_build.sh gh
+    - name: windows build
+      if: matrix.build == 'windows'
+      run: |
+        ./scripts/windows_build.ps1
+    - name: macos build
+      if: matrix.build == 'macos'
+      run: |
+        ./scripts/macos_build.sh
     - uses: actions/upload-artifact@v3
       with:
-        name: artefacts_linux
-        path: ./build_binary/*.deb
-        if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
+        name: artifacts-${{ matrix.build }}-${{ matrix.arch }}
+        path: |
+          ./build-${{ matrix.build }}-${{ matrix.arch }}/*.deb
+          ./build-${{ matrix.build }}-${{ matrix.arch }}/*.exe
+          ./build-${{ matrix.build }}-${{ matrix.arch }}/*.app
+          ./build-${{ matrix.build }}-${{ matrix.arch }}/*.dmg
+        if-no-files-found: error
         retention-days: 1
 
   publish:
-    needs: [build-linux]
+    needs: [build]
     runs-on: ubuntu-latest
+    if: |
+      github.event_name != 'pull_request'
     timeout-minutes: 2
     env:
       GH_REPO: ${{ github.repository }}
@@ -48,56 +79,56 @@ jobs:
     permissions:
       contents: write
     steps:
-      # Must perform checkout first, since it deletes the target directory
-      # before running, and would therefore delete the downloaded artifacts
       - uses: actions/checkout@v3
-
       - uses: actions/download-artifact@v3
       - name: Install dependencies
-        run: | 
+        run: |
           sudo apt-get update && sudo apt-get install -y gettext-base
           sudo apt install -y tree
-
 
       - if: github.event_name == 'workflow_dispatch'
         run: echo "TAG_NAME=${{ github.event.inputs.tag_name }}" >> $GITHUB_ENV
       - if: github.event_name == 'schedule'
         run: echo 'TAG_NAME=nightly' >> $GITHUB_ENV
-      - if: github.event_name == 'push'
+      - if: |
+          github.event_name == 'push' &&
+          github.ref_type == 'tag'
         run: |
           TAG_NAME=${{ github.ref }}
           echo "TAG_NAME=${TAG_NAME#refs/tags/}" >> $GITHUB_ENV
+          echo "BUILD_USING_TAG=true" >> $GITHUB_ENV
+      - if: |
+          github.event_name == 'push' &&
+          github.ref_type == 'branch'
+        run: |
+          echo "TAG_NAME=dev" >> $GITHUB_ENV
 
-      # - name: Rename artefacts
-      #   run: | 
-      #     mv -v artefacts_linux/ryuu artefacts_linux/ryuu-linux
+      # - name: Rename artifacts
+      #   run: |
+      #     mv -v artifacts_linux/ryuu artifacts_linux/ryuu-linux
       - name: Public release
         run: |
           echo "Publishing to github release"
-          tree -L 3
-          gh release create $TAG_NAME || echo "Release creation failed, but continuing..." && true
-          gh release upload --clobber $TAG_NAME artefacts_linux/*
+          tree -L 1 artifacts*
+          PRERELEASE_FLAG=""
+          case "$TAG_NAME" in
+            *dev*|*nightly*|*beta*|*alpha*)
+              echo "PRERELEASE"
+              PRERELEASE_FLAG="--prerelease"
+              ;;
+            *)
+              echo "Not PRERELEASE"
+              ;;
+          esac
 
-
-  remove-old-artifacts:
-    runs-on: ubuntu-latest
-    timeout-minutes: 2
-    permissions: write-all
-
-    needs: [build-linux, publish]
-    if: always()  # This ensures that cleanup runs even if dependent jobs fail
-
-    steps:
-
-    - name: Remove old artifacts
-      uses: c-hive/gha-remove-artifacts@v1
-      with:
-        age: '0 second' # '<number> <unit>', e.g. 5 days, 2 years, 90 seconds, parsed by Moment.js
-    - uses: geekyeggo/delete-artifact@v2
-      with:
-          name: |
-              artifact*
-              artefact*
-              .*
-          failOnError: true
+          if [ ! "$BUILD_USING_TAG" = "true" ] ; then
+            echo "Not Built using Tag"
+            TAG_NAME="${{ env.APP_VERSION }}.${{ github.run_number }}-${TAG_NAME}"
+          else
+            echo "Built Using Tag"
+          fi
+          echo "TAG_NAME : ${TAG_NAME}"
+          gh release create ${PRERELEASE_FLAG} "$TAG_NAME" || echo "Release creation failed, but continuing..." && true
+          gh release upload --clobber "$TAG_NAME" artifacts-linux-x86_64/*
+          gh release upload --clobber "$TAG_NAME" artifacts-windows-x86_64/*
 
