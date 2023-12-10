@@ -12,7 +12,7 @@ echo "$build_dir"
 
 build_nativifier_binary() {
     npm install
-    npm build
+    npm run build
 
 }
 

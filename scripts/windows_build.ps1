@@ -13,7 +13,7 @@ function InstallDependencies {
 function CreateApp {
 
 npm install
-npm build
+npm run build
 
 
 
