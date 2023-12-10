@@ -1,5 +1,8 @@
 #!/bin/sh
 
+
+_package_name="chatbot-client"
+
 printf "Build on MacOS"
 architecture="$(uname -p)"
 
@@ -17,9 +20,9 @@ build_nativifier_binary() {
 }
 
 package_binary() {
-    ls "chatbot-client-darwin-x64"
     mkdir "$build_dir"
-
+    ls "${_package_name}-darwin-x64"
+    mv "${_package_name}-darwin-x64/*.app" "$build_dir"
 }
 
 build_main() {
