@@ -22,9 +22,8 @@ npm run build
 function BuildBinary {
 
 New-Item -Path "$build_dir" -Type Directory
-Get-ChildItem
 
-Get-ChildItem ".\(Windows\$package_name-win32-x64"
+tree .
 
 Move-Item -Path ".\(Windows\${package_name}-win32-x64" -Destination "$build_dir\$executable_name"
 
