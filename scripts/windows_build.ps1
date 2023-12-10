@@ -24,9 +24,9 @@ function BuildBinary {
 New-Item -Path "$build_dir" -Type Directory
 Get-ChildItem
 
-Get-ChildItem ".\Windows\$package_name-win32-x64"
+Get-ChildItem ".\(Windows\$package_name-win32-x64"
 
-Move-Item -Path ".\${package_name}-win32-x64" -Destination "$build_dir\$executable_name"
+Move-Item -Path ".\(Windows\${package_name}-win32-x64" -Destination "$build_dir\$executable_name"
 
 
 }
