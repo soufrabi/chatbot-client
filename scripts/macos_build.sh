@@ -5,7 +5,7 @@ set -x
 _package_name="chatbot-client"
 
 printf "Build on MacOS"
-architecture="$(uname -p)"
+architecture="$(uname -m)"
 
 if [ "$architecture" = "i386" ] ; then 
     architecture="aarch64"
