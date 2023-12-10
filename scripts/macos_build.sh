@@ -17,6 +17,7 @@ build_nativifier_binary() {
 }
 
 package_binary() {
+    ls "chatbot-client-darwin-x64"
     mkdir "$build_dir"
 
 }
