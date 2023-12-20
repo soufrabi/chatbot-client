@@ -1,47 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2023 Anirban Dey -->
 <component type="desktop-application">
-  <id>io.github.anirbandey1.ChatbotClient</id>
-  <metadata_license>CC0-1.0</metadata_license>
-  <project_license>MIT</project_license>
-  <name>Chatbot Client</name>
-  <developer_name>Anirban Dey</developer_name>
-  <url type="homepage">https://github.com/soufrabi/chatbot-client/</url>
-  <url type="bugtracker">https://github.com/flathub/io.github.anirbandey1.ChatbotClient/issues</url>
-  <url type="help">https://github.com/soufrabi/chatbot-client</url>
-  <summary>Electron wrapper for ChatGPT website</summary>
-  <description>
-    <p>A desktop application for using ChatGPT.</p>
-    <p>This is a electron wrapper for ChatGPT website, packaged into a Flatpak. This repackaging is not supported by OpenAI.</p>
-  </description>
-  <screenshots>
-    <screenshot type="default">
-      <image>https://soufrabi.github.io/project-assets/chatbot-client/screenshots/login-page.png</image>
-      <caption>Screenshot of login page </caption>
-    </screenshot>
-  </screenshots>
-  <launchable type="desktop-id">io.github.anirbandey1.ChatbotClient.desktop</launchable>
-  <content_rating type="oars-1.0">
-    <content_attribute id="social-chat">moderate</content_attribute>
-    <content_attribute id="social-info">intense</content_attribute>
-    <content_attribute id="money-purchasing">intense</content_attribute>
-    <content_attribute id="money-advertising">mild</content_attribute>
-  </content_rating>
+    <id>io.github.anirbandey1.ChatbotClient</id>
+    <metadata_license>CC0-1.0</metadata_license>
+    <project_license>MIT</project_license>
+    <name>Chatbot Client</name>
+    <developer_name>Anirban Dey</developer_name>
+    <url type="homepage">https://github.com/soufrabi/chatbot-client/</url>
+    <url type="bugtracker">https://github.com/flathub/io.github.anirbandey1.ChatbotClient/issues</url>
+    <url type="help">https://github.com/soufrabi/chatbot-client</url>
+    <summary>Electron wrapper for ChatGPT website</summary>
+    <description>
+        <p>A desktop application for using ChatGPT.</p>
+        <p>This is a electron wrapper for ChatGPT website, packaged into a Flatpak. This repackaging
+            is not supported by OpenAI.</p>
+    </description>
+    <screenshots>
+        <screenshot type="default">
+            <image>
+                https://soufrabi.github.io/project-assets/chatbot-client/screenshots/login-page.png</image>
+            <caption>Screenshot of login page </caption>
+        </screenshot>
+    </screenshots>
+    <launchable type="desktop-id">io.github.anirbandey1.ChatbotClient.desktop</launchable>
+    <content_rating type="oars-1.0">
+        <content_attribute id="social-chat">moderate</content_attribute>
+        <content_attribute id="social-info">intense</content_attribute>
+        <content_attribute id="money-purchasing">intense</content_attribute>
+        <content_attribute id="money-advertising">mild</content_attribute>
+    </content_rating>
 
-  <releases>
-    <release version="1.0.1" date="2023-07-17">
-      <description>
-        <p>
-          Fixed Google Authentication bug by adding user-agent flag to nativefier
-        </p>
-      </description>
-    </release>
-    <release version="1.0.0" date="2023-07-04">
-      <description>
-        <p>
-          Initial Release
-        </p>
-      </description>
-    </release>
-  </releases>
+    <releases>
+        <release version="1.0.4" date="2023-12-20">
+            <description>
+                <p>
+                    Add keywords in desktop file
+                </p>
+            </description>
+        </release>
+        <release version="1.0.3" date="2023-11-25">
+            <description>
+                <p>
+                    Use github actions to build binary. Use linux.sh script not makefile
+                </p>
+            </description>
+        </release>
+        <release version="1.0.2" date="2023-09-19">
+            <description>
+                <p>
+                    Build .deb binary instead of .tar.xz archive
+                </p>
+            </description>
+        </release>
+        <release version="1.0.1" date="2023-07-17">
+            <description>
+                <p>
+                    Fixed Google Authentication bug by adding user-agent flag to nativefier
+                </p>
+            </description>
+        </release>
+        <release version="1.0.0" date="2023-07-04">
+            <description>
+                <p>
+                    Initial Release
+                </p>
+            </description>
+        </release>
+    </releases>
 </component>
