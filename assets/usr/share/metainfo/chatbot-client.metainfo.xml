@@ -34,7 +34,7 @@
         <release version="1.0.4" date="2023-12-20">
             <description>
                 <p>
-                    Add keywords in desktop file
+                    Add keywords in desktop file. Use svg image instead of png.
                 </p>
             </description>
         </release>
