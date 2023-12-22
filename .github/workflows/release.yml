@@ -71,6 +71,14 @@ jobs:
       # - name: Rename artifacts
       #   run: | 
       #     mv -v artifacts_linux/ryuu artifacts_linux/ryuu-linux
+      - name : Checksums
+        run: |
+          for dir in artifacts*; do
+            for el in "$dir"/*; do
+              printf "%s\n" "${el}"
+              sha256sum "${el}" > "${el}.sha256sum"
+            done
+          done
       - name: Public release
         run: |
           echo "Publishing to github release"
