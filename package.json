@@ -7,6 +7,6 @@
     "build":"nativefier --name 'chatbot-client'  'https://chat.openai.com'  --user-agent 'Mozilla/5.0 (Windows NT 10.0; rv:74.0) Gecko/20100101'  "
   },
   "dependencies":{
-    "electron":"^25.2.0",
-    "nativefier":"^50.1.1"}
+    "electron":"^28.1.0",
+    "nativefier":"^52.0.0"}
 }
