@@ -45,8 +45,6 @@ cd build_binary
 sudo apt install ./chatbot-client.deb
 ```
 
-
-
 ## Author
 
 <a href = "https://anirbandey.net" style="text-decoration: none; color: inherit;">Anirban Dey</a>
@@ -54,8 +52,3 @@ sudo apt install ./chatbot-client.deb
 ## License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details
-
-
-
-
-
