@@ -19,15 +19,12 @@
   <a href="https://github.com/soufrabi/chatbot-client/stargazers">
     <img alt="GitHub stars" src="https://img.shields.io/github/stars/soufrabi/chatbot-client?style=social">
   </a>
-
 </p>
 
 ## Screenshots
 <div align="center" style=""> 
-
   <img alt="screenshot1" style="max-width:40vw;" src="https://soufrabi.github.io/assets/chatbot-client/screenshots/login_page.png">
   <!-- <img alt="screenshot1" style="max-width:40vw;" src="https://soufrabi.github.io/assets/chatbot-client/screenshots/screenshot2.png"> -->
-
 </div>
 
 ## Getting Started
