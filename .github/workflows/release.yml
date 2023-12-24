@@ -15,6 +15,9 @@ on:
     - "latest"
     - "nightly"
 
+env:
+  APP_VERSION: "v1.0.5"
+
 jobs:
   build-linux:
     runs-on: ubuntu-22.04
@@ -33,7 +36,7 @@ jobs:
       run: ./scripts/linux.sh build-deb
     - uses: actions/upload-artifact@v3
       with:
-        name: artifacts_linux
+        name: artifacts-linux-x86_64
         path: ./build_binary/*.deb
         if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
         retention-days: 1
@@ -54,23 +57,31 @@ jobs:
 
       - uses: actions/download-artifact@v3
       - name: Install dependencies
-        run: | 
+        run: |
           sudo apt-get update && sudo apt-get install -y gettext-base
           sudo apt install -y tree
-
 
       - if: github.event_name == 'workflow_dispatch'
         run: echo "TAG_NAME=${{ github.event.inputs.tag_name }}" >> $GITHUB_ENV
       - if: github.event_name == 'schedule'
         run: echo 'TAG_NAME=nightly' >> $GITHUB_ENV
-      - if: github.event_name == 'push'
+      - if: |
+          github.event_name == 'push' &&
+          github.ref_type == 'tag'
         run: |
           TAG_NAME=${{ github.ref }}
           echo "TAG_NAME=${TAG_NAME#refs/tags/}" >> $GITHUB_ENV
+          echo "BUILD_USING_TAG=true" >> $GITHUB_ENV
+      - if: |
+          github.event_name == 'push' &&
+          github.ref_type == 'branch'
+        run: |
+          echo "TAG_NAME=dev" >> $GITHUB_ENV
 
       # - name: Rename artifacts
-      #   run: | 
+      #   run: |
       #     mv -v artifacts_linux/old_name artifacts_linux/new_name
+
       - name : Checksums
         run: |
           for dir in artifacts*; do
@@ -79,10 +90,31 @@ jobs:
               sha256sum "${el}" > "${el}.sha256sum"
             done
           done
+
       - name: Public release
         run: |
           echo "Publishing to github release"
-          tree -L 3
-          gh release create $TAG_NAME || echo "Release creation failed, but continuing..." && true
-          gh release upload --clobber $TAG_NAME artifacts_linux/*
+          tree -L 1 artifacts*
+          PRERELEASE_FLAG=""
+          case "$TAG_NAME" in
+            *dev*|*nightly*|*beta*|*alpha*)
+              echo "PRERELEASE"
+              PRERELEASE_FLAG="--prerelease"
+              ;;
+            *)
+              echo "Not PRERELEASE"
+              ;;
+          esac
+
+          if [ ! "$BUILD_USING_TAG" = "true" ] ; then
+            echo "Not Built using Tag"
+            TAG_NAME="${{ env.APP_VERSION }}.${{ github.run_number }}-${TAG_NAME}"
+          else
+            echo "Built Using Tag"
+          fi
+          echo "TAG_NAME : ${TAG_NAME}"
+          gh release create ${PRERELEASE_FLAG} "$TAG_NAME" || echo "Release creation failed, but continuing..." && true
+          gh release upload --clobber "$TAG_NAME" artifacts-linux-x86_64/*
+          # gh release upload --clobber "$TAG_NAME" artifacts-windows-x86_64/*
+
 

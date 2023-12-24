@@ -5,11 +5,11 @@ if [ -f /.flatpak-info ]; then
     echo "Flatpak environment detected"
     echo "Running Inside Sandbox"
     export TMPDIR="$XDG_RUNTIME_DIR/app/${FLATPAK_ID}"
-    exec zypak-wrapper /app/opt/chatbot-client/chatbot-client
+    exec zypak-wrapper /app/share/chatbot-client/chatbot-client
 
 else 
     echo "Not a flatpak environment"
-    /opt/chatbot-client/chatbot-client-linux-x64/chatbot-client
+    /usr/share/chatbot-client/chatbot-client
 fi
 
 

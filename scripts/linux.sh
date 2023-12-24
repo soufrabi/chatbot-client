@@ -49,12 +49,16 @@ build_deb() {
     echo ${build_dir}
 	rm -rf ${build_dir}
 	mkdir -pv "${build_dir}/${_pkgname}"
-	mkdir -pv "${build_dir}/${_pkgname}/usr"
-	mkdir -pv "${build_dir}/${_pkgname}/opt/${_pkgname}"
+	mkdir -pv "${build_dir}/${_pkgname}/usr/bin"
+	mkdir -pv "${build_dir}/${_pkgname}/usr/share/applications"
+	mkdir -pv "${build_dir}/${_pkgname}/usr/share/metainfo"
+	mkdir -pv "${build_dir}/${_pkgname}/usr/share/icons/hicolor/scalable/apps"
 	cp -rv "assets/DEBIAN" "${build_dir}/${_pkgname}"
-	cp -rv "${_pkgname}-linux-x64" "${build_dir}/${_pkgname}/opt/${_pkgname}"
-	cp -rv "assets/usr/bin" "${build_dir}/${_pkgname}/usr"
-	cp -rv "assets/usr/share" "${build_dir}/${_pkgname}/usr"
+	cp -rv "assets/${_pkgname}" "${build_dir}/${_pkgname}/usr/bin"
+	cp -rv "assets/${_pkgname}.desktop" "${build_dir}/${_pkgname}/usr/share/applications"
+	cp -rv "assets/${_pkgname}.metainfo.xml" "${build_dir}/${_pkgname}/usr/share/metainfo"
+	cp -rv "assets/${_pkgname}.svg" "${build_dir}/${_pkgname}/usr/share/icons/hicolor/scalable/apps"
+	cp -rv "${_pkgname}-linux-x64" "${build_dir}/${_pkgname}/usr/share/${_pkgname}"
 	cd ${build_dir} && dpkg-deb --build ${_pkgname}
 
 
@@ -65,11 +69,9 @@ build_flatpak() {
 	rm -vf chatbot-client.deb control.tar.xz debian-binary
 	tar -xf data.tar.*
 	rm -vf data.tar.xz
-	mkdir -pv /app/opt
-	cp -rv opt/chatbot-client/chatbot-client-linux-x64 /app/opt/chatbot-client
 	cp -rv usr/share /app
 	cp -rv usr/bin /app
-	desktop-file-edit --set-key=Exec --set-value="/app/bin/chatbot-client" /app/share/applications/chatbot-client.desktop
+	desktop-file-edit --set-key=Exec --set-value="chatbot-client" /app/share/applications/chatbot-client.desktop
 	desktop-file-edit --set-key=Icon --set-value="io.github.anirbandey1.ChatbotClient" /app/share/applications/chatbot-client.desktop
 
 }
