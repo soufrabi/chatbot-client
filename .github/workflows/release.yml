@@ -70,7 +70,7 @@ jobs:
 
       # - name: Rename artifacts
       #   run: | 
-      #     mv -v artifacts_linux/ryuu artifacts_linux/ryuu-linux
+      #     mv -v artifacts_linux/old_name artifacts_linux/new_name
       - name : Checksums
         run: |
           for dir in artifacts*; do
