@@ -20,7 +20,7 @@ on:
       - "nightly"
 
 env:
-  APP_VERSION: "v1.0.5"
+  APP_VERSION: "v1.0.6"
 
 jobs:
   build-linux:
