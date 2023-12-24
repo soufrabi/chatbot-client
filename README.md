@@ -27,11 +27,20 @@
   <!-- <img alt="screenshot1" style="max-width:40vw;" src="https://soufrabi.github.io/assets/chatbot-client/screenshots/screenshot2.png"> -->
 </div>
 
-## Getting Started
+## Installation
+The preffered way of installing this is using package managers, but if you do not wish to do it that way, skip ahead to *Build from source* section.
+
+### Flatpak
+
+This app is [distributed on Flathub](https://flathub.org/apps/io.github.anirbandey1.ChatbotClient),
+meaning that you can download it from the flatpak package manager by running this command, even as an unprivleged user:
+```sh
+flatpak install io.github.anirbandey1.ChatbotClient
+```
 
 ### Build from source
 
-Create a debian binary
+#### Creating a debian binary
 
 ```sh
 git clone https://github.com/soufrabi/chatbot-client.git
