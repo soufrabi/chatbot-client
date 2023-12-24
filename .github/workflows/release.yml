@@ -7,13 +7,17 @@ on:
       tag_name:
         description: 'Tag name for release'
         required: false
-        default: nightly
+        default: dev
   push:
+    branches:
+      - "main"
+      - "master"
+
     tags:
-    - "v[0-9]+.[0-9]+.[0-9]+*"
-    - "stable"
-    - "latest"
-    - "nightly"
+      - "v[0-9]+.[0-9]+.[0-9]+*"
+      - "stable"
+      - "latest"
+      - "nightly"
 
 env:
   APP_VERSION: "v1.0.5"
