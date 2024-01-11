@@ -41,7 +41,7 @@ The preferred way of installing this is using package managers, but if you do no
 ### Flatpak
 
 This app is [distributed on Flathub](https://flathub.org/apps/io.github.anirbandey1.ChatbotClient),
-meaning that you can install it using  the flatpak package manager by running this command, even as an unprivleged user:
+meaning that you can install it using  the `flatpak` package manager by running this command, even as an unprivleged user:
 ```sh
 flatpak install io.github.anirbandey1.ChatbotClient
 ```
