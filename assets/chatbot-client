@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 flags="--enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto"
 
@@ -7,11 +7,19 @@ if [ -f /.flatpak-info ]; then
     echo "Flatpak environment detected"
     echo "Running Inside Sandbox"
     export TMPDIR="$XDG_RUNTIME_DIR/app/${FLATPAK_ID}"
-    exec zypak-wrapper /app/share/chatbot-client/chatbot-client $flags
+    if [ $# -gt 0 ] ; then
+        exec zypak-wrapper /app/share/chatbot-client/chatbot-client $flags "$@"
+    else
+        exec zypak-wrapper /app/share/chatbot-client/chatbot-client $flags
+    fi
 
 else 
     echo "Not a flatpak environment"
-    /usr/share/chatbot-client/chatbot-client $flags
+    if [ $# -gt 0 ] ; then
+        /usr/share/chatbot-client/chatbot-client $flags "$@"
+    else
+        /usr/share/chatbot-client/chatbot-client $flags
+    fi
 fi
 
 
