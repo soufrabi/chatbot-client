@@ -5,4 +5,4 @@ Essential: no
 Priority: optional
 Depends:
 Maintainer: Anirban Dey
-Description: Electron wrapper around ChatGPT website
+Description: Electron wrapper for ChatGPT website
