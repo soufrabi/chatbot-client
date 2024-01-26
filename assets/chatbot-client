@@ -1,20 +1,49 @@
-#!/bin/sh
+#!/bin/bash
 
-flags="--enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto"
+set -x
 
-if [ -f /.flatpak-info ]; then
+flags=""
+flags_autodetect="--enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto"
+flags_wayland="--enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=wayland"
 
-    echo "Flatpak environment detected"
-    echo "Running Inside Sandbox"
-    export TMPDIR="$XDG_RUNTIME_DIR/app/${FLATPAK_ID}"
-    exec zypak-wrapper /app/share/chatbot-client/chatbot-client $flags
+if [ "$FORCE_X11" = "1" ] || [ "$FORCE_X11" = "true" ] ; then
+    flags=""
+elif [ "$FORCE_WAYLAND" = "1" ] || [ "$FORCE_WAYLAND" = "true" ] ; then
+    flags="${flags_wayland}"
+else
+    flags="${flags_autodetect}"
+fi
 
-else 
-    echo "Not a flatpak environment"
-    /usr/share/chatbot-client/chatbot-client $flags
+if [ -n "$ADDITIONAL_FLAGS" ] ; then
+    flags="${flags} $ADDITIONAL_FLAGS"
+fi
+
+if [ -n "$OVERRIDE_ALL_FLAGS" ] ; then
+    flags="$OVERRIDE_ALL_FLAGS"
 fi
 
 
+printf "Flags passed to electron app : %s" "${flags}"
 
+if [ -f /.flatpak-info ]; then
+    printf "Flatpak environment detected\n"
+    printf "Running Inside Sandbox\n"
+    export TMPDIR="$XDG_RUNTIME_DIR/app/${FLATPAK_ID}"
+    if [ $# -gt 0 ] ; then
+        exec zypak-wrapper /app/share/chatbot-client/chatbot-client $flags "$@"
+    else
+        exec zypak-wrapper /app/share/chatbot-client/chatbot-client $flags
+    fi
+else
+    printf "Not a flatpak environment\n"
+    if [ $# -gt 0 ] ; then
+        /usr/share/chatbot-client/chatbot-client $flags "$@"
+    else
+        /usr/share/chatbot-client/chatbot-client $flags
+    fi
+fi
+
+
+set +x
 
 
