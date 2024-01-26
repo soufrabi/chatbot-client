@@ -1,6 +1,18 @@
 #!/bin/bash
 
-flags="--enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto"
+set -x
+
+flags=""
+flags_autodetect="--enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto"
+flags_wayland="--enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=wayland"
+
+if [ "$FORCE_X11" = "1" ] || [ "$FORCE_X11" = "true" ] ; then
+    flags=""
+elif [ "$FORCE_WAYLAND" = "1" ] || [ "$FORCE_WAYLAND" = "true" ] ; then
+    flags="${flags_wayland}"
+else
+    flags="${flags_autodetect}"
+fi
 
 if [ -f /.flatpak-info ]; then
 
@@ -23,6 +35,6 @@ else
 fi
 
 
-
+set +x
 
 
