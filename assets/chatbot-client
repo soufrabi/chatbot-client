@@ -14,19 +14,28 @@ else
     flags="${flags_autodetect}"
 fi
 
-if [ -f /.flatpak-info ]; then
+if [ -n "$ADDITIONAL_FLAGS" ] ; then
+    flags="${flags} $ADDITIONAL_FLAGS"
+fi
 
-    echo "Flatpak environment detected"
-    echo "Running Inside Sandbox"
+if [ -n "$OVERRIDE_ALL_FLAGS" ] ; then
+    flags="$OVERRIDE_ALL_FLAGS"
+fi
+
+
+printf "Flags passed to electron app : %s" "${flags}"
+
+if [ -f /.flatpak-info ]; then
+    printf "Flatpak environment detected\n"
+    printf "Running Inside Sandbox\n"
     export TMPDIR="$XDG_RUNTIME_DIR/app/${FLATPAK_ID}"
     if [ $# -gt 0 ] ; then
         exec zypak-wrapper /app/share/chatbot-client/chatbot-client $flags "$@"
     else
         exec zypak-wrapper /app/share/chatbot-client/chatbot-client $flags
     fi
-
-else 
-    echo "Not a flatpak environment"
+else
+    printf "Not a flatpak environment\n"
     if [ $# -gt 0 ] ; then
         /usr/share/chatbot-client/chatbot-client $flags "$@"
     else
