@@ -23,7 +23,7 @@ if [ -n "$OVERRIDE_ALL_FLAGS" ] ; then
 fi
 
 
-printf "Flags passed to electron app : %s" "${flags}"
+printf "Flags passed to electron app : %s\n" "${flags}"
 
 if [ -f /.flatpak-info ]; then
     printf "Flatpak environment detected\n"
