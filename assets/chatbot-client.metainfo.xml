@@ -31,6 +31,16 @@
     </content_rating>
 
     <releases>
+        <release version="1.0.8" date="2024-01-26">
+            <description>
+                <p>
+                    Pass custom flags to to the electron binary.
+                    Use FORCE_X11, FORCE_WAYLAND to explicitly set display backend.
+                    Use ADDITIONAL_FLAGS to add some flags without messing with the default flags
+                    Use OVERRIDE_ALL_FLAGS to just use manually set flags
+                </p>
+            </description>
+        </release>
         <release version="1.0.7" date="2023-12-28">
             <description>
                 <p>
