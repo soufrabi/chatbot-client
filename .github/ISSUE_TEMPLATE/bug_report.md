@@ -16,13 +16,16 @@ $ flatpak info io.github.anirbandey1.ChatbotClient
 $ flatpak run io.github.anirbandey1.ChatbotClient
 ```
 
-**Are you manually setting any environment variables? Did removing them resolve the issue?**
+**Are you manually setting any environment variables? Did removing them resolve the issue?**  
 Use [flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal) to check this
 
 **Are you using X11 or Wayland?**
 ```sh
-echo "$XDG_SESSION_TYPE"
+$ echo "$XDG_SESSION_TYPE"
 ```
+
+**Which distro are you using?**  
+The name of the distribution and version number would be needed. Flatpaks are supposed to be distro independent but some issues do crop up from time to time.
 
 **Describe the bug**
 A clear and concise description of what the bug is.
